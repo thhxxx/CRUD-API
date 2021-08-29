@@ -1,17 +1,24 @@
 import '../assets/css/Home.scss'
+import {useEffect, useState} from "react";
+import {fetchProduct} from "../assets/js/CallAPI";
 
 export const Home = () => {
 
-    alert("hello day 1")
+    const [product, setProduct] = useState()
+
+    useEffect(function () {
+        fetchProduct().then(function (data) {
+            setProduct(data)
+        })
+    }, [])
+
+    console.log(product)
 
     return (
         <div className="Home">
-            <div>
-                <h1>hello</h1>
-            </div>
-            <div>
-                <h1>world</h1>
-            </div>
+            mount
+            update
+            destroy
         </div>
     )
 }

@@ -1,0 +1,15 @@
+{
+  "adidas": [
+    {
+      "name": "4dfwd pulse shoes",
+      "image": "4dfwd-pulse-shoes.jpg",
+      "price": "4000000",
+      "sale": "50",
+      "size": {
+        "38": "40",
+        "40": "10",
+        "42": "0"
+      }
+    }
+  ]
+}
