@@ -5,10 +5,10 @@
       "image": "4dfwd-pulse-shoes.jpg",
       "price": "4000000",
       "sale": "50",
-      "size": {
-        "38": "40",
-        "40": "10",
-        "42": "0"
+      "quantity": {
+        "size_38": "40",
+        "size_40": "10",
+        "size_42": "0"
       }
     }
   ]
