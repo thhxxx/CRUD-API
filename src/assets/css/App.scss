@@ -65,3 +65,14 @@ body {
 .overflow-hidden {
   overflow: hidden;
 }
+
+.error-notification{
+  margin-bottom: 25px;
+  width: 100%;
+  background: rgba(255, 3, 3, 0.20);
+  padding: 12px 20px;
+  color: #ff0303;
+  span{
+    font-weight: 700;
+  }
+}
