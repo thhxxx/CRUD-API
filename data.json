@@ -1,28 +1,64 @@
 {
-  "adidas": [
+  "nike": [
     {
-      "name": "4dfwd pulse shoes",
-      "image": "4dfwd-pulse-shoes.jpg",
-      "price": "3500000",
-      "sale": "15",
+      "name": "air jordan 1 mid se shoes 1r6S57",
+      "image": "air-jordan-1-mid-se-shoes-1r6S57.jpg",
+      "price": "4500000",
+      "sale": "20",
       "quantity": {
-        "size38": "23",
-        "size40": "0",
-        "size42": "54"
+        "size38": "231",
+        "size40": "34",
+        "size42": "234"
       },
       "id": 1
     },
     {
-      "name": "4dfwd pulse shoes(6)",
-      "image": "4dfwd-pulse-shoes(6).jpg",
-      "price": "4800000",
-      "sale": "25",
+      "name": "air jordan 1 mid shoes Rjgf9b",
+      "image": "air-jordan-1-mid-shoes-Rjgf9b.jpg",
+      "price": "4400000",
+      "sale": "0",
       "quantity": {
-        "size38": "546",
-        "size40": "74",
-        "size42": "54"
+        "size38": "3123",
+        "size40": "42",
+        "size42": "45"
       },
       "id": 2
+    },
+    {
+      "name": "air jordan 1 retro high og pro shoes",
+      "image": "air-jordan-1-retro-high-og-pro-shoes.jpg",
+      "price": "6700000",
+      "sale": "35",
+      "quantity": {
+        "size38": "234",
+        "size40": "53",
+        "size42": "6"
+      },
+      "id": 3
+    },
+    {
+      "name": "air jordan 11 cmft low mens shoes dpWjHc",
+      "image": "air-jordan-11-cmft-low-mens-shoes-dpWjHc.jpg",
+      "price": "0",
+      "sale": "0",
+      "quantity": {
+        "size38": "0",
+        "size40": "0",
+        "size42": "0"
+      },
+      "id": 4
+    },
+    {
+      "name": "air jordan 11 cmft low mens shoes ZDSL6h",
+      "image": "air-jordan-11-cmft-low-mens-shoes-ZDSL6h.jpg",
+      "price": "5700000",
+      "sale": "50",
+      "quantity": {
+        "size38": "2443",
+        "size40": "34",
+        "size42": "223"
+      },
+      "id": 5
     }
   ]
 }

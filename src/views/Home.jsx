@@ -12,7 +12,7 @@ export const Home = () => {
         fetchProduct().then(function (data) {
             setProduct(data)
         })
-    }, [])
+    }, [product])
 
     return (
         <div className="Home">

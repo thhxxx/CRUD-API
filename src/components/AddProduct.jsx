@@ -1,22 +1,16 @@
 import "../assets/css/AddProduct.scss"
 import {useState} from "react";
-
-const initState = {
-    name: '',
-    image: '',
-    price: '',
-    sale: '',
-    quantity: {
-        size38: "",
-        size40: "",
-        size42: ""
-    }
-}
+import axios from "axios";
 
 export const AddProduct = () => {
+    const [image, setImage] = useState('')
+    const [price, setPrice] = useState('0')
+    const [sale, setSale] = useState('0')
+    const [size38, setSize38] = useState('0')
+    const [size40, setSize40] = useState('0')
+    const [size42, setSize42] = useState('0')
+
     const [isShow, setIsShow] = useState(false)
-    const [product, setProduct] = useState(initState)
-    const [imageName, setImageName] = useState('')
     const [errorText, setErrorText] = useState('')
 
     function handleIsShow() {
@@ -27,36 +21,43 @@ export const AddProduct = () => {
         }
     }
 
-    function handleInput(event) {
-        const {name, value} = event.target
-        setProduct({
-            ...product,
-            [name]: value
-        })
-
-    }
-
-    if (imageName) {
-        const startIndex = (imageName.indexOf('\\') >= 0 ? imageName.lastIndexOf('\\') : imageName.lastIndexOf('/'));
-        let filename = imageName.substring(startIndex);
-        if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
-            filename = filename.substring(1);
-        }
-        product.image = filename
-        product.name = filename.split(".").slice(0, 1).join().replace(/-/g, " ")
+    function resetForm() {
+        setPrice("0")
+        setImage("")
+        setSale("0")
+        setSize38("0")
+        setSize40("0")
+        setSize42("0")
+        setErrorText("")
     }
 
     async function addNewProduct() {
-        if (!product.name || !product.image) {
-            setErrorText('Please enter name and photo')
-        } else if (!product.price || product.price < 0) {
-            setErrorText('Please enter price greater than or equal to 0')
-        } else if (!product.sale || product.sale < 0) {
-            setErrorText('Please enter sale greater than or equal to 0')
-        } else if (!product.quantity || product.quantity < 0) {
-            setErrorText('Please enter quantity greater than or equal to 0')
+        if (!image) {
+            setErrorText("Please choose image")
+        } else if (price < 0) {
+            setErrorText("Price must be greater than or equal to 0")
+        } else if (sale < 0 || sale > 100) {
+            setErrorText("Sale price ranges from 0 to 100")
+        } else if ((size38 || size40 || size42) < 0) {
+            setErrorText("Quantity must be greater than or equal to 0")
         } else {
-
+            try {
+                await axios.post('http://localhost:2210/nike', {
+                    name: image.split(/(\\|\/)/g).pop().split(".").slice(0, 1).join().replace(/-/g, " "),
+                    image: image.split(/(\\|\/)/g).pop(),
+                    price: price,
+                    sale: sale,
+                    quantity: {
+                        size38: size38,
+                        size40: size40,
+                        size42: size42
+                    }
+                })
+                resetForm()
+                setIsShow(false)
+            } catch (e) {
+                console.log(e)
+            }
         }
     }
 
@@ -88,27 +89,27 @@ export const AddProduct = () => {
                                         className="text-input"
                                         type="text"
                                         placeholder=" "
-                                        name="name"
-                                        value={product.name}
-                                        onChange={handleInput}
+                                        value={image.split(/(\\|\/)/g).pop().split(".").slice(0, 1).join().replace(/-/g, " ")}
+                                        readOnly={true}
                                     />
                                     <label>Name</label>
                                 </div>
                                 <div className="form-input">
                                     <input
                                         type="file"
-                                        value={imageName}
-                                        onChange={event => setImageName(event.target.value)}
+                                        value={image}
+                                        onChange={event => setImage(event.target.value)}
                                     />
                                 </div>
+
+
                                 <div className="form-input">
                                     <input
                                         className="text-input"
-                                        type="number"
+                                        type="text"
                                         placeholder=" "
-                                        name="price"
-                                        value={product.price}
-                                        onChange={handleInput}
+                                        value={price}
+                                        onChange={event => setPrice(event.target.value)}
                                     />
                                     <label>Price (VND)</label>
                                 </div>
@@ -117,9 +118,8 @@ export const AddProduct = () => {
                                         className="text-input"
                                         type="number"
                                         placeholder=" "
-                                        name="sale"
-                                        value={product.sale}
-                                        onChange={handleInput}
+                                        value={sale}
+                                        onChange={event => setSale(event.target.value)}
                                     />
                                     <label>Sale %</label>
                                 </div>
@@ -131,9 +131,8 @@ export const AddProduct = () => {
                                         className="text-input"
                                         type="number"
                                         placeholder=" "
-                                        name="quantity"
-                                        value={product.quantity}
-                                        onChange={handleInput}
+                                        value={size38}
+                                        onChange={event => setSize38(event.target.value)}
                                     />
                                     <label>Size 38</label>
                                 </div>
@@ -142,9 +141,8 @@ export const AddProduct = () => {
                                         className="text-input"
                                         type="number"
                                         placeholder=" "
-                                        name="quantity"
-                                        value={product.quantity}
-                                        onChange={handleInput}
+                                        value={size40}
+                                        onChange={event => setSize40(event.target.value)}
                                     />
                                     <label>Size 40</label>
                                 </div>
@@ -153,9 +151,8 @@ export const AddProduct = () => {
                                         className="text-input"
                                         type="number"
                                         placeholder=" "
-                                        name="quantity"
-                                        value={product.quantity}
-                                        onChange={handleInput}
+                                        value={size42}
+                                        onChange={event => setSize42(event.target.value)}
                                     />
                                     <label>Size 42</label>
                                 </div>

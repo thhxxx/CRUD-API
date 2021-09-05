@@ -10,6 +10,37 @@
     transition: all .25s ease;
     background: #fbfbfb;
     align-items: center;
+    position: relative;
+
+    &:hover {
+      .action {
+        opacity: 1;
+      }
+    }
+
+    .action {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      width: 35px;
+      opacity: 0;
+      transition: all .25s ease;
+
+      button {
+        color: #fff;
+        background: #e54646;
+        border: none;
+        height: 35px;
+        width: 35px;
+        line-height: 35px;
+        font-size: 15px;
+        cursor: pointer;
+
+        &:first-child {
+          background: #4e4e4e;
+        }
+      }
+    }
 
     &:hover {
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);

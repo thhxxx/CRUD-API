@@ -3,11 +3,16 @@ import "../assets/css/Product.scss"
 
 export const Product = (props) => {
     const product = props.setProduct
-
+    const isLogin = true
 
     function formatPrice(input) {
         return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     }
+
+    function editProduct(value) {
+        console.log(value)
+    }
+
     /*const [quantity, setQuantity] = useState("")
     function handleQuantity(num) {
         setQuantity(num)
@@ -19,7 +24,7 @@ export const Product = (props) => {
                 product.map((value) => {
                     return <div className="item" key={value.id}>
                         <div className="image">
-                            <img src={'https://thhxxx.github.io/image/adidas/' + value.image} alt={value.name}/>
+                            <img src={'https://thhxxx.github.io/image/nike/' + value.image} alt={value.name}/>
                             {
                                 (value.sale === "0")
                                     ? '' : <span>-{value.sale}%</span>
@@ -54,6 +59,12 @@ export const Product = (props) => {
                             <button disabled={quantity === "0"} className="btn">add to cart</button>*/}
                             <button className="btn">view more</button>
                         </div>
+                        {
+                            isLogin ? <div className="action">
+                                <button onClick={() => editProduct(value)}><i className="fas fa-pencil"></i></button>
+                                <button><i className="fas fa-trash"></i></button>
+                            </div> : null
+                        }
                     </div>
                 })
             }
