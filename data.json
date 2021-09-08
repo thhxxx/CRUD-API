@@ -1,64 +1,28 @@
 {
   "nike": [
     {
-      "name": "air jordan 1 mid se shoes 1r6S57",
-      "image": "air-jordan-1-mid-se-shoes-1r6S57.jpg",
-      "price": "4500000",
-      "sale": "20",
+      "name": "air jordan 1 mid shoes Rjgf9b helkko",
+      "image": "air-jordan-1-mid-shoes-Rjgf9b",
+      "price": "7600000",
+      "sale": "35",
       "quantity": {
-        "size38": "231",
-        "size40": "34",
-        "size42": "234"
+        "size38": "412",
+        "size40": "0",
+        "size42": "324"
       },
       "id": 1
     },
     {
-      "name": "air jordan 1 mid shoes Rjgf9b",
-      "image": "air-jordan-1-mid-shoes-Rjgf9b.jpg",
-      "price": "4400000",
-      "sale": "0",
+      "name": "air-jordan-1-mid-se-shoes-1r6S57",
+      "image": "air-jordan-1-mid-se-shoes-1r6S57",
+      "price": "5900000",
+      "sale": "5",
       "quantity": {
-        "size38": "3123",
-        "size40": "42",
-        "size42": "45"
+        "size38": "423",
+        "size40": "321",
+        "size42": "543"
       },
       "id": 2
-    },
-    {
-      "name": "air jordan 1 retro high og pro shoes",
-      "image": "air-jordan-1-retro-high-og-pro-shoes.jpg",
-      "price": "6700000",
-      "sale": "35",
-      "quantity": {
-        "size38": "234",
-        "size40": "53",
-        "size42": "6"
-      },
-      "id": 3
-    },
-    {
-      "name": "air jordan 11 cmft low mens shoes dpWjHc",
-      "image": "air-jordan-11-cmft-low-mens-shoes-dpWjHc.jpg",
-      "price": "0",
-      "sale": "0",
-      "quantity": {
-        "size38": "0",
-        "size40": "0",
-        "size42": "0"
-      },
-      "id": 4
-    },
-    {
-      "name": "air jordan 11 cmft low mens shoes ZDSL6h",
-      "image": "air-jordan-11-cmft-low-mens-shoes-ZDSL6h.jpg",
-      "price": "5700000",
-      "sale": "50",
-      "quantity": {
-        "size38": "2443",
-        "size40": "34",
-        "size42": "223"
-      },
-      "id": 5
     }
   ]
 }

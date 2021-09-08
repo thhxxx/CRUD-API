@@ -1,16 +1,16 @@
 import "../assets/css/Product.scss"
+import {useDispatch} from "react-redux";
+import {editProduct} from "../reducers/ProductReducer";
+import axios from "axios";
 
 
 export const Product = (props) => {
     const product = props.setProduct
     const isLogin = true
+    const dispatch = useDispatch()
 
     function formatPrice(input) {
         return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    }
-
-    function editProduct(value) {
-        console.log(value)
     }
 
     /*const [quantity, setQuantity] = useState("")
@@ -18,13 +18,24 @@ export const Product = (props) => {
         setQuantity(num)
     }*/
 
+    async function deleteProduct(id) {
+        try {
+            // eslint-disable-next-line no-restricted-globals
+            if (confirm("Are you sure?")) {
+                await axios.delete("http://localhost:2210/nike" + "/" + id)
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     return (
         <div className="list-product">
             {
                 product.map((value) => {
                     return <div className="item" key={value.id}>
                         <div className="image">
-                            <img src={'https://thhxxx.github.io/image/nike/' + value.image} alt={value.name}/>
+                            <img src={'https://thhxxx.github.io/image/nike/' + value.image + '.jpg'} alt={value.name}/>
                             {
                                 (value.sale === "0")
                                     ? '' : <span>-{value.sale}%</span>
@@ -61,12 +72,14 @@ export const Product = (props) => {
                         </div>
                         {
                             isLogin ? <div className="action">
-                                <button onClick={() => editProduct(value)}><i className="fas fa-pencil"></i></button>
-                                <button><i className="fas fa-trash"></i></button>
+                                <button onClick={() => dispatch(editProduct({value}))}>
+                                    <i className="fas fa-pencil"/>
+                                </button>
+                                <button onClick={() => deleteProduct(value.id)}><i className="fas fa-trash"/></button>
                             </div> : null
                         }
                     </div>
-                })
+                }).reverse()
             }
         </div>
     )
