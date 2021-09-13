@@ -2,8 +2,11 @@ import {Link} from "react-router-dom";
 import {dropDown} from '../assets/js/DropDown'
 import React from "react";
 import '../assets/css/Nav.scss'
+import {useSelector} from "react-redux";
 
 export const Nav = () => {
+    const productList = useSelector(state => state.CartReducer.productList)
+
     return (
         <nav>
             <div className="dropdown">
@@ -24,7 +27,7 @@ export const Nav = () => {
             </div>
             <div style={{marginLeft: "15px"}} className="dropdown">
                 <Link to="/cart"><button className="my-style dropBtn fas fa-shopping-cart"/></Link>
-                <span className="num">0</span>
+                <span className="num">{productList.length}</span>
             </div>
         </nav>
     )

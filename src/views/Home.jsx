@@ -9,9 +9,15 @@ export const Home = () => {
     const isLogin = true
 
     useEffect(function () {
+        let isMounted = true;
         fetchProduct().then(function (data) {
-            setProduct(data)
+            if (isMounted) {
+                setProduct(data)
+            }
         })
+        return () => {
+            isMounted = false
+        }
     }, [product])
 
     return (

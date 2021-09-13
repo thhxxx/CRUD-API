@@ -1,17 +1,18 @@
 import "../assets/css/AddProduct.scss"
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {resetProduct} from "../reducers/ProductReducer";
 
 let initState = {
     name: "",
     image: "",
     price: "0",
     sale: "0",
-    quantity: {
-        size38: "0",
-        size40: "0",
-        size42: "0"
+    size: {
+        "38": "0",
+        "40": "0",
+        "42": "0"
     }
 }
 
@@ -20,6 +21,7 @@ export const AddProduct = () => {
     const [isShow, setIsShow] = useState(false)
     const [errorText, setErrorText] = useState('')
     const selectedProduct = useSelector(state => state.ProductReducer.product)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         if (selectedProduct) {
@@ -31,6 +33,7 @@ export const AddProduct = () => {
     function handleIsShow() {
         if (isShow === true) {
             setIsShow(false)
+            dispatch(resetProduct())
         } else {
             setIsShow(true)
         }
@@ -38,13 +41,13 @@ export const AddProduct = () => {
 
     function handleInputQuantity(event) {
         const {name, value} = event.target;
-        const quantity = Object.assign({}, product.quantity);
-        quantity[name] = value;
-
-        setProduct({
-            ...product,
-            quantity,
-        });
+        const getQuantity = {
+            ...product, size: {
+                ...product.size
+            }
+        }
+        getQuantity.size[name] = value
+        setProduct(getQuantity)
     }
 
     function handleInput(event) {
@@ -67,7 +70,7 @@ export const AddProduct = () => {
             setErrorText("Price must be greater than or equal to 0")
         } else if (product.sale < 0 || product.sale > 100) {
             setErrorText("Sale price ranges from 0 to 100")
-        } else if (product.quantity.size38 < 0 || product.quantity.size40 < 0 || product.quantity.size42 < 0) {
+        } else if (product.size["38"] < 0 || product.size["40"] < 0 || product.size["42"] < 0) {
             setErrorText("Quantity must be greater than or equal to 0")
         } else {
             return true
@@ -82,10 +85,10 @@ export const AddProduct = () => {
                     image: product.image,
                     price: product.price,
                     sale: product.sale,
-                    quantity: {
-                        size38: product.quantity.size38,
-                        size40: product.quantity.size40,
-                        size42: product.quantity.size42
+                    size: {
+                        "38": product.size["38"],
+                        "40": product.size["40"],
+                        "42": product.size["42"]
                     }
                 })
                 resetForm()
@@ -96,7 +99,7 @@ export const AddProduct = () => {
         }
     }
 
-    async function updateProduct(id) {
+    async function updateProduct(id, callback) {
         if (validateForm()) {
             try {
                 await axios.put('http://localhost:2210/nike/' + id, {
@@ -104,14 +107,15 @@ export const AddProduct = () => {
                     image: product.image,
                     price: product.price,
                     sale: product.sale,
-                    quantity: {
-                        size38: product.quantity.size38,
-                        size40: product.quantity.size40,
-                        size42: product.quantity.size42
+                    size: {
+                        "38": product.size["38"],
+                        "40": product.size["40"],
+                        "42": product.size["42"]
                     }
                 })
                 resetForm()
                 setIsShow(false)
+                callback()
             } catch (e) {
                 console.log(e)
             }
@@ -150,7 +154,7 @@ export const AddProduct = () => {
                                         placeholder=" "
                                         onChange={handleInput}
                                         name="name"
-                                        value={product.name.replace(/-/g, " ")}
+                                        value={product.name}
                                     />
                                     <label>Name</label>
                                 </div>
@@ -195,8 +199,8 @@ export const AddProduct = () => {
                                         className="text-input"
                                         type="number"
                                         placeholder=" "
-                                        name="size38"
-                                        value={product.quantity.size38}
+                                        name="38"
+                                        value={product.size["38"]}
                                         onChange={handleInputQuantity}
                                     />
                                     <label>Size 38</label>
@@ -206,8 +210,8 @@ export const AddProduct = () => {
                                         className="text-input"
                                         type="number"
                                         placeholder=" "
-                                        name="size40"
-                                        value={product.quantity.size40}
+                                        name="40"
+                                        value={product.size["40"]}
                                         onChange={handleInputQuantity}
                                     />
                                     <label>Size 40</label>
@@ -217,8 +221,8 @@ export const AddProduct = () => {
                                         className="text-input"
                                         type="number"
                                         placeholder=" "
-                                        name="size42"
-                                        value={product.quantity.size42}
+                                        name="42"
+                                        value={product.size["42"]}
                                         onChange={handleInputQuantity}
                                     />
                                     <label>Size 42</label>
@@ -228,7 +232,9 @@ export const AddProduct = () => {
                         <div className="bottom">
                             {
                                 selectedProduct
-                                    ? <button onClick={() => updateProduct(selectedProduct.id)} className="btn">update
+                                    ?
+                                    <button onClick={() => updateProduct(selectedProduct.id, dispatch(resetProduct()))}
+                                            className="btn">update
                                         product</button>
                                     : <button onClick={addNewProduct} className="btn">add new</button>
                             }

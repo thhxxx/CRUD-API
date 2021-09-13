@@ -9,9 +9,12 @@ const ProductReducer = createSlice({
         editProduct: (state, action) => {
             const {value} = action.payload
             state.product = value
+        },
+        resetProduct: state => {
+            state.product = undefined
         }
     }
 })
 
-export const {editProduct} = ProductReducer.actions
+export const {editProduct, resetProduct} = ProductReducer.actions
 export default ProductReducer.reducer
